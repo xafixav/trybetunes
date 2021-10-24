@@ -47,6 +47,7 @@ export default class Search extends Component {
           <Link
             to={ `/album/${collectionId}` }
             data-testid={ `link-to-album-${collectionId}` }
+            state={ { Aname: artistName, CName: collectionName } }
           >
             {artistName}
           </Link>
