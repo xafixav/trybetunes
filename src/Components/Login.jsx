@@ -23,15 +23,10 @@ export default class Login extends Component {
     return BOOLEAN;
   }
 
-  removeLoading = () => {
-
-  }
-
   buttonFunc = async () => {
     const { usuario, criar } = this.state;
     this.setState({ isLoading: true });
     await criar({ name: usuario });
-    await updateUser();
     this.setState({ hasLogged: true });
   }
 
