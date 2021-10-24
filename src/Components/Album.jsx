@@ -6,6 +6,7 @@ export default class Album extends Component {
 
       <div data-testid="page-album">
         <p>ola mundo sou o Album</p>
+        {console.log(this.props)}
       </div>
 
     );
