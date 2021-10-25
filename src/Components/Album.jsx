@@ -49,11 +49,11 @@ mapAll = () => {
   const { musicList } = this.state;
   const result = musicList.filter((element) => element.kind === 'song')
     .map((element, index) => {
-      const { trackName, previewUrl } = element;
+      const { trackName, previewUrl, trackId } = element;
       return (
         <div key={ index }>
           <span>{trackName}</span>
-          <MusicCard name={ trackName } preview={ previewUrl } />
+          <MusicCard name={ trackName } preview={ previewUrl } trackId={ trackId } />
         </div>
       );
     });
