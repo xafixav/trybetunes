@@ -52,7 +52,7 @@ export default class MusicCard extends Component {
   }
 
    favoriteSong = async (event) => {
-     const { id, checked } = event.target;
+     const { id } = event.target;
      this.setState({ isLoading: true });
      await addSong(id);
      this.setState({ isLoading: false });
