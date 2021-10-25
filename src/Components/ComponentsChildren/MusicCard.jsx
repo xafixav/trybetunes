@@ -9,35 +9,44 @@ export default class MusicCard extends Component {
     this.state = {
       isLoading: false,
       favoriteList: [],
+      checked: false,
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     this.getSavedMusics();
+  }
+
+  updateIsFavorite = () => {
+    const { trackId: track } = this.props;
+    const { favoriteList } = this.state;
+    const isThisFavorite = favoriteList.some((element) => Number(element.trackId) === track);
+    this.setState({ checked: isThisFavorite });
+    return isThisFavorite;
   }
 
   getSavedMusics = async () => {
     this.setState({ isLoading: true });
     const favorites = await getFavoriteSongs();
-    this.setState({ isLoading: false, favoriteList: favorites });
+    this.setState({ isLoading: false, favoriteList: favorites }, this.updateIsFavorite);
   }
 
   generateMusicCard = () => {
     const { preview: previewUrl } = this.props;
     const { trackId: track } = this.props;
-    const { favoriteList } = this.state;
-    const isThisFavorite = favoriteList.some((element) => Number(element) === track);
+    const { all, name } = this.props;
+    const { checked } = this.state;
     return (
       <div>
         <label htmlFor="Favorita">
           Favorita
           <input
             type="checkbox"
-            name="Favorita"
+            name={ name }
             data-testid={ `checkbox-music-${track}` }
-            id={ track }
-            onClick={ this.favoriteSong }
-            checked={ isThisFavorite }
+            id={ all }
+            onChange={ this.favoriteSong }
+            checked={ checked }
           />
         </label>
         <audio data-testid="audio-component" src={ previewUrl } controls>
@@ -52,10 +61,16 @@ export default class MusicCard extends Component {
   }
 
    favoriteSong = async (event) => {
-     const { id } = event.target;
-     this.setState({ isLoading: true });
-     await addSong(id);
-     this.setState({ isLoading: false });
+     const { name } = event.target;
+     const { all } = this.props;
+     const filtrado = all.find((element) => element.trackName === name);
+     if (event.target.checked) {
+       this.setState({ isLoading: true });
+       await addSong(filtrado);
+       this.setState({ isLoading: false, checked: true });
+     } else {
+       this.setState({ checked: false });
+     }
    }
 
    render() {

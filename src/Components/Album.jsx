@@ -20,7 +20,6 @@ export default class Album extends Component {
 
 setUpdate = () => {
   const { musicList } = this.state;
-  console.log(musicList);
   const info = musicList[0];
   this.setState(
     { update: true, artist: info.artistName, artistAlbum: info.collectionName },
@@ -48,12 +47,16 @@ fetchMusic = async () => {
 mapAll = () => {
   const { musicList } = this.state;
   const result = musicList.filter((element) => element.kind === 'song')
-    .map((element, index) => {
+    .map((element, index, arr) => {
       const { trackName, previewUrl, trackId } = element;
       return (
         <div key={ index }>
           <span>{trackName}</span>
-          <MusicCard name={ trackName } preview={ previewUrl } trackId={ trackId } />
+          <MusicCard
+            name={ trackName }
+            preview={ previewUrl }
+            trackId={ trackId }
+            all={arr}/>
         </div>
       );
     });
