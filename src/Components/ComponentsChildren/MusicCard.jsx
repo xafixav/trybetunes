@@ -45,7 +45,7 @@ export default class MusicCard extends Component {
             type="checkbox"
             name={ name }
             data-testid={ `checkbox-music-${track}` }
-            id={ all }
+            id="Favorita"
             onChange={ this.favoriteSong }
             checked={ checked }
           />
@@ -72,10 +72,10 @@ export default class MusicCard extends Component {
      } else {
        this.setState({ isLoading: true });
        await removeSong(filtrado);
-       this.setState({ isLoading: false, checked: false });
        if (update !== undefined) {
          update();
        }
+       this.setState({ isLoading: false, checked: false });
      }
    }
 
