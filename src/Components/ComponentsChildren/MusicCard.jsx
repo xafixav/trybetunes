@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loading from '../Loading';
-import { addSong, getFavoriteSongs } from '../../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../../services/favoriteSongsAPI';
 
 export default class MusicCard extends Component {
   constructor(props) {
@@ -63,14 +63,19 @@ export default class MusicCard extends Component {
 
    favoriteSong = async (event) => {
      const { name } = event.target;
-     const { all } = this.props;
+     const { all, update } = this.props;
      const filtrado = all.find((element) => element.trackName === name);
      if (event.target.checked) {
        this.setState({ isLoading: true });
        await addSong(filtrado);
        this.setState({ isLoading: false, checked: true });
      } else {
-       this.setState({ checked: false });
+       this.setState({ isLoading: true });
+       await removeSong(filtrado);
+       this.setState({ isLoading: false, checked: false });
+       if (update !== undefined) {
+         update();
+       }
      }
    }
 
@@ -90,4 +95,5 @@ MusicCard.propTypes = {
   trackId: PropTypes.number.isRequired,
   all: PropTypes.arrayOf(PropTypes.object).isRequired,
   name: PropTypes.string.isRequired,
+  update: PropTypes.func.isRequired,
 };

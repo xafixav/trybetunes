@@ -7,7 +7,7 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      usuario: '',
+      user: '',
       criar: createUser,
       isLoading: false,
       hasLogged: false,
@@ -17,22 +17,22 @@ export default class Login extends Component {
   }
 
   autorizeButton = () => {
-    const { usuario } = this.state;
+    const { user } = this.state;
     const MIN = 3;
-    const BOOLEAN = usuario.length >= MIN;
+    const BOOLEAN = user.length >= MIN;
     return BOOLEAN;
   }
 
   buttonFunc = async () => {
-    const { usuario, criar } = this.state;
+    const { user, criar } = this.state;
     this.setState({ isLoading: true });
-    await criar({ name: usuario });
+    await criar({ name: user });
     this.setState({ hasLogged: true });
   }
 
   setName = (event) => {
     const { value } = event.target;
-    this.setState({ usuario: value });
+    this.setState({ user: value });
   }
 
   OFF() {

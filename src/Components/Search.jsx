@@ -10,8 +10,10 @@ export default class Search extends Component {
       artist: '',
       artistName: '',
       artistInfo: [],
+      favoriteList: [],
       isLoading: false,
       searchDone: false,
+      setFavorite: this.setSongAsFavorite,
     };
   }
 
@@ -19,6 +21,12 @@ export default class Search extends Component {
     const text = event.target.value;
     this.setState({ artist: text });
     this.setState({ artistName: text });
+  }
+
+  setSongAsFavorite = (param) => {
+    this.setState({ favoriteList: param });
+    const { favoriteList } = this.state;
+    localStorage.setItem('lista', favoriteList);
   }
 
   setArtist = async () => {
@@ -32,7 +40,7 @@ export default class Search extends Component {
   }
 
   renderArtist = () => {
-    const { artistInfo } = this.state;
+    const { artistInfo, setFavorite, favoriteList } = this.state;
     const MIN = 0;
     const result = artistInfo.map((element) => {
       const { collectionId, artistName, collectionName } = element;
@@ -45,11 +53,16 @@ export default class Search extends Component {
             </p>
           </span>
           <Link
-            to={ `/album/${collectionId}` }
+            to={ { pathname: `/album/${collectionId}` } }
             data-testid={ `link-to-album-${collectionId}` }
-            state={ { Aname: artistName, CName: collectionName } }
+            state={
+              { Aname: artistName,
+                CName: collectionName,
+                Fav: setFavorite,
+                List: favoriteList }
+            }
           >
-            {artistName}
+            {collectionId}
           </Link>
         </div>
       );
