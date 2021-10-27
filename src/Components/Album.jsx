@@ -56,7 +56,8 @@ mapAll = () => {
             name={ trackName }
             preview={ previewUrl }
             trackId={ trackId }
-            all={arr}/>
+            all={ arr }
+          />
         </div>
       );
     });
@@ -68,6 +69,7 @@ render() {
   return (
 
     <div data-testid="page-album">
+      {console.log(this)}
       {update && this.AlbumInfo()}
       {update && this.mapAll()}
     </div>

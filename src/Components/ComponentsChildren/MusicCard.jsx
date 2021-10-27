@@ -20,7 +20,8 @@ export default class MusicCard extends Component {
   updateIsFavorite = () => {
     const { trackId: track } = this.props;
     const { favoriteList } = this.state;
-    const isThisFavorite = favoriteList.some((element) => Number(element.trackId) === track);
+    const isThisFavorite = favoriteList
+      .some((element) => Number(element.trackId) === track);
     this.setState({ checked: isThisFavorite });
     return isThisFavorite;
   }
@@ -79,7 +80,6 @@ export default class MusicCard extends Component {
        <div>
          {isLoading && <Loading />}
          {this.generateMusicCard()}
-
        </div>
      );
    }
@@ -88,4 +88,6 @@ export default class MusicCard extends Component {
 MusicCard.propTypes = {
   preview: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
+  all: PropTypes.arrayOf(PropTypes.object).isRequired,
+  name: PropTypes.string.isRequired,
 };
