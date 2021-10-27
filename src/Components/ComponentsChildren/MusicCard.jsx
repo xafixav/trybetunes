@@ -35,7 +35,7 @@ export default class MusicCard extends Component {
   generateMusicCard = () => {
     const { preview: previewUrl } = this.props;
     const { trackId: track } = this.props;
-    const { all, name } = this.props;
+    const { name } = this.props;
     const { checked } = this.state;
     return (
       <div>
