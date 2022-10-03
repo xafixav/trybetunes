@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
+import Login from './Login';
 import Loading from './Loading';
 
 export default class Header extends Component {
@@ -9,10 +10,16 @@ export default class Header extends Component {
     this.state = {
       isLoading: true,
       user: {},
+      create: this.createUser,
     };
+    // this.createUser = this.createUser.bind(this);
   }
 
   componentDidMount() {
+    this.loadingDone();
+  }
+
+  componentDidUpdate() {
     this.loadingDone();
   }
 
@@ -20,6 +27,10 @@ export default class Header extends Component {
     const userObj = await getUser();
     this.setState({ user: userObj });
     this.setState({ isLoading: false });
+  }
+
+  createUser() {
+    console.log(this);
   }
 
   renderUserName = () => {
@@ -33,7 +44,7 @@ export default class Header extends Component {
       </header>
     );
     if (user.name === undefined) {
-      that = '';
+      that = <Login { ... this.state } />;
     }
 
     return that;
