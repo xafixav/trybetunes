@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Album from './Components/Album';
 import Header from './Components/Header';
 import Favorites from './Components/Favorites';
-import Login from './Components/Login';
 import NotFound from './Components/NotFound';
 import Profile from './Components/Profile';
 import ProfileEdit from './Components/ProfileEdit';
@@ -20,11 +19,9 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div>
-          <Header />
+          <Header { ... this.state } />
           <Switch>
-            <Route exact path="/">
-              <Login { ... this.state } />
-            </Route>
+            <Route exact path="/" />
             <Route exact path="/search" component={ Search } />
             <Route exact path="/album/:id" component={ Album } />
             <Route exact path="/favorites" component={ Favorites } />
