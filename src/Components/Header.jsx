@@ -22,6 +22,10 @@ export default class Header extends Component {
     this.setState({ isLoading: false });
   }
 
+  logoff = async () => {
+    localStorage.removeItem('user');
+  }
+
   renderUserName = () => {
     const { user } = this.state;
     let that = (
@@ -30,6 +34,12 @@ export default class Header extends Component {
         <li><Link to="/search" data-testid="link-to-search">Search</Link></li>
         <li><Link to="/favorites" data-testid="link-to-favorites">Favorites</Link></li>
         <li><Link to="/profile" data-testid="link-to-profile">Profile</Link></li>
+        <button
+          type="button"
+          onClick={ () => { this.logoff(); } }
+        >
+          <Link to="/">Sair</Link>
+        </button>
       </header>
     );
     if (user.name === undefined) {
