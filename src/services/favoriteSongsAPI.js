@@ -15,6 +15,7 @@ const saveFavoriteSongs = (favoriteSongs) => localStorage
 // Esse tipo de função que "chama outra função" é chamada de
 // "currying function" https://javascript.info/currying-partials
 // não se preocupe, estudaremos isso futuramente.
+
 // --------------------------------------------------------------------
 
 const simulateRequest = (response) => (callback) => {
