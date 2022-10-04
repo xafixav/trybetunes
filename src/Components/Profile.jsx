@@ -27,7 +27,6 @@ export default class Profile extends Component {
     return (
       <div>
         <p>{user.name}</p>
-        <p>{user.name}</p>
         <br />
         <h1>Email:</h1>
         <p>{user.email}</p>
@@ -47,7 +46,6 @@ export default class Profile extends Component {
     return (
 
       <div data-testid="page-profile">
-        <p>ola mundo sou o Profile</p>
         {isLoading && <Loading />}
         {this.renderProfile()}
       </div>

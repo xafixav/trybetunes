@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
+import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
 import Loading from './Loading';
 import './CSS/Login.css';
@@ -26,8 +27,10 @@ export default class Login extends Component {
 
   buttonFunc = async () => {
     const { user, criar } = this.state;
+    const { create } = this.props;
     this.setState({ isLoading: true });
     await criar({ name: user });
+    await create();
     this.setState({ hasLogged: true });
   }
 
@@ -83,3 +86,7 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  create: PropTypes.func.isRequired,
+};
