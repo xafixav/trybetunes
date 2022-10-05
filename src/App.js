@@ -19,7 +19,7 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <div className="background">
           <Header { ... this.state } />
           <Switch>
             <Route exact path="/" />
