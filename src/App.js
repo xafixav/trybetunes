@@ -7,6 +7,7 @@ import NotFound from './Components/NotFound';
 import Profile from './Components/Profile';
 import ProfileEdit from './Components/ProfileEdit';
 import Search from './Components/Search';
+import './Components/CSS/Background.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
+        <div className="background">
           <Header { ... this.state } />
           <Switch>
             <Route exact path="/" />

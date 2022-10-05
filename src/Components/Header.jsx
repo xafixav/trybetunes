@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Login from './Login';
 import Loading from './Loading';
+import './CSS/Header.css';
 
 export default class Header extends Component {
   constructor(props) {
@@ -29,6 +30,10 @@ export default class Header extends Component {
     this.setState({ isLoading: false });
   }
 
+  logoff = async () => {
+    localStorage.removeItem('user');
+  }
+
   createUser() {
     console.log(this);
   }
@@ -36,11 +41,19 @@ export default class Header extends Component {
   renderUserName = () => {
     const { user } = this.state;
     let that = (
-      <header data-testid="header-component">
+      <header data-testid="header-component" className="header-container">
         <h1 data-testid="header-user-name">{`Be welcome ${user.name}`}</h1>
         <li><Link to="/search" data-testid="link-to-search">Search</Link></li>
         <li><Link to="/favorites" data-testid="link-to-favorites">Favorites</Link></li>
         <li><Link to="/profile" data-testid="link-to-profile">Profile</Link></li>
+        <li>
+          <button
+            type="button"
+            onClick={ () => { this.logoff(); } }
+          >
+            <Link to="/">Sair</Link>
+          </button>
+        </li>
       </header>
     );
     if (user.name === undefined) {

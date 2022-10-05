@@ -3,6 +3,7 @@ import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
 import Loading from './Loading';
+import './CSS/Login.css';
 
 export default class Login extends Component {
   constructor(props) {
@@ -66,17 +67,20 @@ export default class Login extends Component {
   render() {
     const { isLoading, hasLogged } = this.state;
     return (
-      <div data-testid="page-login">
-        <form>
-          <input
-            type="text"
-            data-testid="login-name-input"
-            placeholder="insert your name in here"
-            onChange={ this.setName }
-          />
-          {this.autorizeButton() ? this.ON() : this.OFF()}
-          {isLoading && <Loading />}
-          {hasLogged && <Redirect to="/search" />}
+      <div data-testid="page-login" className="login-container">
+        <form className="login-form-container">
+          <div className="login-form-input">
+            <h1 className="login-logo">TRYBE TUNES</h1>
+            <input
+              type="text"
+              data-testid="login-name-input"
+              placeholder="insert your name in here"
+              onChange={ this.setName }
+            />
+            {this.autorizeButton() ? this.ON() : this.OFF()}
+            {isLoading && <Loading />}
+            {hasLogged && <Redirect to="/search" />}
+          </div>
         </form>
       </div>
     );

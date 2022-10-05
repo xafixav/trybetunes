@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from './Loading';
+import './CSS/Search.css';
 
 export default class Search extends Component {
   constructor(props) {
@@ -106,25 +107,26 @@ export default class Search extends Component {
   render() {
     const { isLoading, searchDone, artistInfo, artist } = this.state;
     return (
-      <section>
-        <div data-testid="page-search">
-          <input
-            type="text"
-            placeholder="Type your Artist"
-            data-testid="search-artist-input"
-            value={ artist }
-            onChange={ this.searchArtist }
-          />
-          {this.authorizeButton()}
-        </div>
+      <div className="search-container">
+        <section>
+          <div data-testid="page-search" className="search-form-container">
+            <input
+              type="text"
+              placeholder="Type your Artist"
+              data-testid="search-artist-input"
+              value={ artist }
+              onChange={ this.searchArtist }
+            />
+            {this.authorizeButton()}
+          </div>
 
-        <div>
-          {searchDone && artistInfo.length > 0 && this.searchComplete() }
-          {isLoading && <Loading />}
-          {searchDone && this.renderArtist()}
-        </div>
-      </section>
-
+          <div className="search-complete">
+            {searchDone && artistInfo.length > 0 && this.searchComplete() }
+            {isLoading && <Loading />}
+            {searchDone && this.renderArtist()}
+          </div>
+        </section>
+      </div>
     );
   }
 }
